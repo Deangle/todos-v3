@@ -1,11 +1,13 @@
 p {
   margin: 0;
 }
+
 #todo-list {
   width: 550px;
   margin: auto;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 25px 50px 0 rgba(0, 0, 0, 0.1);
   background-color: #fff;
+  position: relative;
 }
 
 #title {
@@ -15,12 +17,9 @@ p {
 
 .ant-layout-header {
   padding: 0;
+  padding-left: 50px;
   background-color: #fff;
   border-bottom: 1px solid #ccc;
-}
-
-.ant-layout-header .ant-checkbox-wrapper {
-  width: 10%;
 }
 
 .ant-layout-header #input {
@@ -32,8 +31,31 @@ p {
   padding: 0;
 }
 
-.ant-layout-header>.ant-checkbox-wrapper {
-  vertical-align: top;
+.ant-layout-content>.ant-checkbox-wrapper {
+  display: inline;
+}
+
+.ant-layout-content>.ant-checkbox-wrapper .ant-checkbox {
+  display: none;
+}
+
+.ant-layout-content>.ant-checkbox-wrapper .ant-checkbox+span {
+  transform: rotate(90deg);
+  display: block;
+  font-size: 20px;
+  color: #e6e6e6;
+  position: absolute;
+  top: 16px;
+  left: 24px;
+  padding: 0;
+}
+
+.ant-layout-content>.ant-checkbox-wrapper .ant-checkbox+span:before {
+  content: '❯';
+}
+
+.ant-layout-content>.ant-checkbox-wrapper .ant-checkbox-checked+span {
+  color: #737373;
 }
 
 #input:focus {
@@ -46,6 +68,7 @@ p {
   font-size: 20px;
   display: flex;
   align-items: center;
+  padding: 10px 20px;
 }
 
 .ant-card-body .ant-checkbox-wrapper {
@@ -53,11 +76,38 @@ p {
   float: left;
 }
 
-.ant-card-body > div {
+.ant-card-body>div {
   float: left;
 }
 
 .completed {
   text-decoration: line-through;
   color: #cdcdcd;
+}
+
+.ant-card:hover .destroy {
+  display: block;
+}
+
+.destroy {
+  display: none;
+  position: absolute;
+  top: 0;
+  right: 10px;
+  bottom: 30px;
+  width: 20px;
+  height: 20px;
+  margin: auto 0;
+  font-size: 30px;
+  color: #cc9a9a;
+  /* margin-bottom: 20px; */
+  transition: color 0.2s ease-out;
+}
+
+.destroy:hover {
+  color: #af5b5e;
+}
+
+.destroy:after {
+  content: '×';
 }
