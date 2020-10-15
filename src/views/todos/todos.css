@@ -2,6 +2,10 @@ p {
   margin: 0;
 }
 
+li {
+  list-style: none;
+}
+
 #todo-list {
   width: 550px;
   margin: auto;
@@ -23,7 +27,7 @@ p {
 }
 
 .ant-layout-header #input {
-  width: 90%;
+  width: 100%;
   height: 100%;
   border: none;
   outline: none;
@@ -116,4 +120,49 @@ p {
 .edit-ipt {
   position: relative;
   z-index: 1;
+}
+
+.ant-layout-footer {
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2), 0 8px 0 -3px #f6f6f6, 0 9px 1px -3px rgba(0, 0, 0, 0.2), 0 16px 0 -6px #f6f6f6, 0 17px 2px -6px rgba(0, 0, 0, 0.2);
+  background-color: #fff;
+  display: flex;
+  padding: 24px 0;
+  color: #000;
+  font-weight: 500;
+}
+
+.ant-layout-footer>div {
+  flex-grow: 1;
+}
+
+.ant-layout-footer>.middle li {
+  float: left;
+  margin-right: 10px;
+  border: 1px solid transparent;
+  padding: 0 4px;
+}
+
+.ant-layout-footer>.middle li.selected {
+  border: 1px solid #ccc;
+  padding: 0 4px;
+}
+
+.ant-layout-footer>.middle li:last-child {
+  0 margin-right: 0;
+}
+
+.ant-layout-footer>.middle li:hover {
+  border-color: #ccc;
+}
+
+.ant-layout-footer>.right {
+  min-width: 157px;
+}
+
+.ant-layout-footer>.right span, .ant-layout-footer>.middle li {
+  cursor: pointer;
+}
+
+.ant-layout-footer>.right span:hover {
+  text-decoration: underline;
 }
