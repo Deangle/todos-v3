@@ -20,12 +20,16 @@
           >
             <span></span>
           </a-checkbox>
-          <a-card v-for="(item, index) in state.todoList" :key="index">
+          <a-card
+            v-for="(item, index) in state.todoList"
+            :key="index"
+            @dblclick="edit(item)"
+          >
             <a-checkbox
               v-model:checked="item.done"
               @change="onChange(index)"
             ></a-checkbox>
-            <div>
+            <div v-if="!item.editing">
               <span class="time" :class="{ completed: item.done }">
                 {{ item.time }}
               </span>
@@ -33,6 +37,14 @@
                 {{ item.content }}
               </p>
             </div>
+            <a-input
+              class="edit-ipt"
+              v-model:value="item.content"
+              v-else
+              @blur="editSure(item)"
+              @keyup.enter="editSure(item)"
+              v-focus="item.editing"
+            ></a-input>
             <span class="destroy" @click="destroy(item)"></span>
           </a-card>
         </a-layout-content>
@@ -42,13 +54,14 @@
 </template>
 
 <script>
-import { ref, reactive, watch, onMounted } from 'vue';
+import { ref, reactive, watch, onMounted, nextTick } from 'vue';
 import './todos.css';
 
 export default {
   setup() {
     let checkAll = ref(false);
     let todo = ref('');
+    let edting = ref(false);
     const time = `${new Date().getFullYear()}-${new Date().getMonth()}-${new Date().getDate()}`;
     const state = reactive({
       todoList: JSON.parse(localStorage.getItem('todoList')) || [],
@@ -88,6 +101,16 @@ export default {
       localStorage.setItem('todoList', JSON.stringify(state.todoList));
     };
 
+    // 编辑
+    const edit = (item) => {
+      item.editing = true;
+    };
+
+    // 编辑确认
+    const editSure = (item) => {
+      item.editing = false;
+    };
+
     // 监听 todoList，单选时控制全选是否勾选
     watch(state.todoList, (list) => {
       let count = 0;
@@ -106,7 +129,17 @@ export default {
       onCheckAllChange,
       onChange,
       destroy,
+      edit,
+      editSure,
     };
+  },
+  directives: {
+    focus: {
+      // 指令的定义
+      mounted(el) {
+        el.focus();
+      },
+    },
   },
 };
 </script>

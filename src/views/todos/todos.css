@@ -78,6 +78,7 @@ p {
 
 .ant-card-body>div {
   float: left;
+  width: 100%;
 }
 
 .completed {
@@ -90,10 +91,10 @@ p {
 }
 
 .destroy {
-  display: none;
+  display: block;
   position: absolute;
   top: 0;
-  right: 10px;
+  right: 20px;
   bottom: 30px;
   width: 20px;
   height: 20px;
@@ -110,4 +111,9 @@ p {
 
 .destroy:after {
   content: '×';
+}
+
+.edit-ipt {
+  position: relative;
+  z-index: 1;
 }
